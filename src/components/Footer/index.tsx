@@ -1,30 +1,58 @@
-import Footerimage from "../../assets/footer.png";
+import { Link } from "react-router-dom";
+import FooterImage from "../../assets/footer.png";
+
 export default function Footer() {
   return (
-    <footer className="bg-neutral-900 text-white py-8 px-4 mt-10">
-
+    <footer className="bg-gradient-to-t from-neutral-900 to-neutral-800 text-white pt-12 pb-6 px-4">
+      {/* Imagem de fundo */}
       <div>
-        <img src= {Footerimage} alt="Logo" className="mx-auto mb-4" />
-
+        <img src={FooterImage} alt="Banner" className="w-full object-cover mb-0" />
       </div>
-      <div className="max-w-6xl mx-auto text-center space-y-4">
-        <h2 className="text-2xl font-semibold">Reserva<span className="font-bold">Mesa</span></h2>
-        
-        <nav className="flex justify-center space-x-6 text-sm">
-          <a href="#" className="hover:underline">Serviços</a>
-          <a href="#" className="hover:underline">Sobre Nós</a>
-          <a href="#" className="hover:underline">Nosso Contato</a>
-          <a href="#" className="hover:underline">FAQs</a>
-          <a href="#" className="hover:underline">Entrar</a>
+
+      {/* Texto e botão */}
+      <div className="text-center -mt-8 z-10 relative px-4">
+        <h3 className="text-white text-xl sm:text-2xl font-bold mb-1">
+          CADASTRE-SE GRATUITAMENTE
+        </h3>
+        <p className="text-gray-200 text-sm sm:text-base mb-4">
+          Cadastre-se conosco e ganhe <br className="hidden sm:block" />
+          incríveis pontos de desconto em reservas de mesa
+        </p>
+        <Link
+          to="/cadastro"
+          className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition inline-block"
+        >
+          Cadastre-se
+        </Link>
+      </div>
+
+      {/* Conteúdo do rodapé */}
+      <div className="max-w-6xl mx-auto text-center space-y-6 mt-6">
+        <h2 className="text-2xl font-semibold">
+          Reserva<span className="font-bold">Mesa</span>
+        </h2>
+
+        <nav className="flex justify-center flex-wrap gap-6 text-sm">
+          <a href="#" className="hover:text-gray-300 transition">Serviços</a>
+          <a href="#" className="hover:text-gray-300 transition">Sobre Nós</a>
+          <a href="#" className="hover:text-gray-300 transition">Nosso Contato</a>
+          <a href="#" className="hover:text-gray-300 transition">FAQs</a>
+          <a href="#" className="hover:text-gray-300 transition">Entrar</a>
         </nav>
 
-        <div className="flex justify-center space-x-6 text-xl mt-4">
-          <a href="#" aria-label="Facebook" className="hover:text-gray-400"><i className="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Twitter" className="hover:text-gray-400"><i className="fab fa-twitter"></i></a>
-          <a href="#" aria-label="Instagram" className="hover:text-gray-400"><i className="fab fa-instagram"></i></a>
+        <div className="flex justify-center space-x-6 text-xl">
+          <a href="#" aria-label="Facebook" className="hover:text-gray-400">
+            <i className="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" aria-label="Twitter" className="hover:text-gray-400">
+            <i className="fab fa-twitter"></i>
+          </a>
+          <a href="#" aria-label="Instagram" className="hover:text-gray-400">
+            <i className="fab fa-instagram"></i>
+          </a>
         </div>
 
-        <p className="text-xs text-gray-400 mt-4">TableBooky.com | All rights reserved</p>
+        <p className="text-xs text-gray-400">TableBooky.com | All rights reserved</p>
       </div>
     </footer>
   );
