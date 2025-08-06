@@ -1,8 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Signup = () => {
+  // Estados para os campos do formulário
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Estados para as mensagens de erro
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+  // Estados para controlar a visibilidade da senha
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Efeito para validar as senhas em tempo real
+  useEffect(() => {
+    // Validação de força da senha
+    if (password.length > 0 && password.length < 8) {
+      setPasswordError('A senha deve ter no mínimo 8 caracteres.');
+    } else if (password.length > 0 && !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      setPasswordError('A senha deve conter pelo menos um símbolo (ex: @, !, #).');
+    } else {
+      setPasswordError('');
+    }
+
+    // Validação de confirmação de senha
+    if (confirmPassword.length > 0 && password !== confirmPassword) {
+      setConfirmPasswordError('As senhas não coincidem.');
+    } else {
+      setConfirmPasswordError('');
+    }
+  }, [password, confirmPassword]);
+
+
+  // Função para lidar com o envio do formulário
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // Verifica se há erros antes de enviar
+    if (passwordError || confirmPasswordError) {
+      alert("Por favor, corrija os erros no formulário.");
+      return;
+    }
+    
+    console.log({ fullName, email, phone, password });
+    alert("Cadastro enviado com sucesso!");
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -17,13 +63,16 @@ const Signup = () => {
         <div className="w-full max-w-md p-8 rounded-xl shadow-md">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Vamos começar</h2>
 
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm mb-1">Nome Completo</label>
               <input
                 type="text"
                 placeholder="Seu Nome"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
               />
             </div>
 
@@ -33,6 +82,9 @@ const Signup = () => {
                 type="email"
                 placeholder="seunome@email.com"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
 
@@ -46,6 +98,9 @@ const Signup = () => {
                   type="tel"
                   placeholder="6165415644"
                   className="w-full px-4 py-2 border border-gray-300 rounded-r-md"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  required
                 />
               </div>
             </div>
@@ -57,6 +112,9 @@ const Signup = () => {
                   type={showPassword ? 'text' : 'password'}
                   placeholder="********"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
                 <button
                   type="button"
@@ -66,6 +124,8 @@ const Signup = () => {
                   👁
                 </button>
               </div>
+              {/* Exibe a mensagem de erro da senha */}
+              {passwordError && <p className="text-red-500 text-xs mt-1">{passwordError}</p>}
             </div>
 
             <div>
@@ -75,6 +135,9 @@ const Signup = () => {
                   type={showConfirmPassword ? 'text' : 'password'}
                   placeholder="********"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
                 />
                 <button
                   type="button"
@@ -84,11 +147,8 @@ const Signup = () => {
                   👁
                 </button>
               </div>
-            </div>
-
-            <div className="text-sm text-gray-600">
-              <p>A senha deve conter no mínimo 8 caracteres</p>
-              <p>A senha deve conter pelo menos um símbolo, por exemplo @, !</p>
+              {/* Exibe a mensagem de erro da confirmação de senha */}
+              {confirmPasswordError && <p className="text-red-500 text-xs mt-1">{confirmPasswordError}</p>}
             </div>
 
             <button

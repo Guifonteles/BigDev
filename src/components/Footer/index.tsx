@@ -40,17 +40,7 @@ export default function Footer() {
           <a href="#" className="hover:text-gray-300 transition">Entrar</a>
         </nav>
 
-        <div className="flex justify-center space-x-6 text-xl">
-          <a href="#" aria-label="Facebook" className="hover:text-gray-400">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#" aria-label="Twitter" className="hover:text-gray-400">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="#" aria-label="Instagram" className="hover:text-gray-400">
-            <i className="fab fa-instagram"></i>
-          </a>
-        </div>
+        {/* O Bloco com os ícones de redes sociais foi removido daqui */}
 
         <p className="text-xs text-gray-400">TableBooky.com | All rights reserved</p>
       </div>
