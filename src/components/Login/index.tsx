@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Importe o useNavigate
 
 const Login = () => {
+  const navigate = useNavigate(); // 2. Inicialize o hook de navegação
+
   // Estado para alternar entre email e telefone
   const [loginMethod, setLoginMethod] = useState<'email' | 'phone'>('email');
   
   // Estados para os campos do formulário
-  const [credential, setCredential] = useState(''); // Um estado para email ou telefone
+  const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
@@ -20,7 +23,6 @@ const Login = () => {
     }
 
     if (loginMethod === 'email') {
-      // Validação simples de email
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(credential)) {
         setCredentialError('Por favor, insira um e-mail válido.');
@@ -28,7 +30,6 @@ const Login = () => {
         setCredentialError('');
       }
     } else { // loginMethod === 'phone'
-      // Validação simples de telefone (apenas números)
       const phoneRegex = /^[0-9]+$/;
       if (!phoneRegex.test(credential)) {
         setCredentialError('Por favor, insira apenas números.');
@@ -53,7 +54,9 @@ const Login = () => {
     }
 
     console.log({ loginMethod, credential, password });
-    alert("Login enviado com sucesso!");
+    
+    // 3. Redireciona para a Homescreen após o "login"
+    navigate('/homescreen');
   };
 
   return (
@@ -100,7 +103,6 @@ const Login = () => {
                 onChange={(e) => setCredential(e.target.value)}
                 required
               />
-              {/* Exibe a mensagem de erro da credencial */}
               {credentialError && <p className="text-red-500 text-xs mt-1">{credentialError}</p>}
             </div>
 
@@ -134,10 +136,7 @@ const Login = () => {
             <div className="text-sm text-center">
               Não tem uma conta? <a href="/signup" className="font-semibold underline">Inscreva-se</a>
             </div>
-
-            <div className="text-sm text-center">
-              <a href="#" className="text-gray-700 underline">Continuar como convidado</a>
-            </div>
+              
           </form>
         </div>
       </div>
