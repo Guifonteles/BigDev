@@ -32,7 +32,7 @@ export default function RestaurantCard({
               key={time}
               className={`px-3 py-1 rounded font-semibold text-sm ${
                 time === activeTime
-                  ? 'bg-black text-white'
+                  ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                   : 'bg-gray-200 text-gray-500 cursor-not-allowed'
               }`}
               disabled={time !== activeTime}
